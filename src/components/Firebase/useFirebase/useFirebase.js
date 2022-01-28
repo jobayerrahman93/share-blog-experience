@@ -1,15 +1,16 @@
 import {
-    createUserWithEmailAndPassword,
-    getAuth,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    signOut,
-    updateProfile
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import initializeAuthentication from "../firebase.init";
+
 
 initializeAuthentication();
 const useFirebase = () => {
@@ -18,15 +19,25 @@ const useFirebase = () => {
   const googleProvider = new GoogleAuthProvider();
   const auth = getAuth();
 
+  // const navigate= useNavigate();
+  // console.log(user);
+  
+
   //   google sign in
 
-  const googleSignIn = () => {
+  const googleSignIn = (location) => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
-        // console.log("user", user);
+        console.log("usergoogle", user);
 
         setUser(user);
+        console.log(location,"google")
+
+        // if(location.state?.from){
+        //   navigate(location.state.from.pathname);
+        // }
+
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -47,14 +58,16 @@ const useFirebase = () => {
 
   //   login user
 
-  const loginUser = (email, password) => {
+  const loginUser = (email, password,location) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        // ...
-
         setUser(user);
+        // ...
+        // if(location.state?.from){
+        //   navigate(location.state.from);
+        // }
         console.log("loginUser", user);
       })
       .catch((error) => {

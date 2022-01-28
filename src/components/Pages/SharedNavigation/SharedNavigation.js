@@ -10,8 +10,8 @@ const SharedNavigation = () => {
   };
 
   return (
-    <div className="App">
-      <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+    <div className="">
+      <nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
         <div className="container">
           <Link className="navbar-brand text-light fs-4 fw-bold" to="/">
             {/* <img src={image1} className="img-fluid" alt="" width="150" height="70"/> */}
@@ -44,7 +44,7 @@ const SharedNavigation = () => {
             
              
                 <li className="nav-item">
-                  <Link style={navStyle} to="/help" className="nav-link me-3">
+                  <Link style={navStyle} to="/blog" className="nav-link me-3">
                     Post Blog
                   </Link>
                 </li>

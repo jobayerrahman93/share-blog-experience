@@ -9,15 +9,15 @@ const Login = () => {
     const [loginData, setLoginData] = useState('');
     const {loginUser,googleSignIn}=useFirebase();
 
-
-
-    // const location=useLocation();
-    // const history=useHistory();
+    // const location =useLocation();
+   
 
 
     const handleOnsubmit = (e) => {
 
-        loginUser(loginData.email,loginData.password)
+        loginUser(loginData.email,loginData.password);
+
+    
         e.preventDefault();
     }
 
