@@ -9,13 +9,20 @@ const Login = () => {
     const [loginData, setLoginData] = useState('');
     const {loginUser,googleSignIn}=useFirebase();
 
-    // const location =useLocation();
+  
    
+    // const location = useLocation();
+    // // console.log('login',location);
+    // const navigate = useNavigate();
 
 
     const handleOnsubmit = (e) => {
 
         loginUser(loginData.email,loginData.password);
+
+        // if (location.state?.from) {
+        //   navigate(location.state.from);
+        // }
 
     
         e.preventDefault();

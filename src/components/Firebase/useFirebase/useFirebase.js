@@ -11,7 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import initializeAuthentication from "../firebase.init";
 
-
 initializeAuthentication();
 const useFirebase = () => {
   const [user, setUser] = useState({});
@@ -19,9 +18,8 @@ const useFirebase = () => {
   const googleProvider = new GoogleAuthProvider();
   const auth = getAuth();
 
-  // const navigate= useNavigate();
+  // const navigate = useNavigate();
   // console.log(user);
-  
 
   //   google sign in
 
@@ -32,12 +30,11 @@ const useFirebase = () => {
         console.log("usergoogle", user);
 
         setUser(user);
-        console.log(location,"google")
+        console.log(location, "google");
 
         // if(location.state?.from){
         //   navigate(location.state.from.pathname);
         // }
-
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -58,17 +55,19 @@ const useFirebase = () => {
 
   //   login user
 
-  const loginUser = (email, password,location) => {
+  const loginUser = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         setUser(user);
-        // ...
-        // if(location.state?.from){
+        
+        // console.log(location, "from loginuser");
+        // if (location.state?.from) {
         //   navigate(location.state.from);
         // }
-        console.log("loginUser", user);
+        
+        // console.log("loginUser", user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -104,7 +103,7 @@ const useFirebase = () => {
         })
           .then(() => {
             // Profile updated!
-            alert("updated");
+            // alert("updated");
           })
           .catch((error) => {
             // An error occurred
