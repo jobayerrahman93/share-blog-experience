@@ -33,7 +33,7 @@ const Login = () => {
             const user = userCredential.user;
             setUser(user);
     
-            console.log(location, "from loginuser");
+            // console.log(location, "from loginuser");
             
             navigate(redirect_uri);
           })
@@ -66,10 +66,10 @@ const Login = () => {
         googleSignIn()
         .then((result) => {
             const user = result.user;
-            console.log("usergoogle", user);
+            // console.log("usergoogle", user);
     
             setUser(user);
-            console.log(location, "google");
+            // console.log(location, "google");
 
 
             navigate(redirect_uri);

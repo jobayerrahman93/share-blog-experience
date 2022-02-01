@@ -31,7 +31,7 @@ const PostBlog = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    console.log("succefully inserted");
+                    // console.log("succefully inserted");
                     // console.log(data);
     
                 }
@@ -43,14 +43,14 @@ const PostBlog = () => {
     const handleOnChange = (e) => {
       const field = e.target.name;
       const value = e.target.value;
-      console.log(field);
-      console.log(value);
+    //   console.log(field);
+    //   console.log(value);
   
       const newPlaceData = { ...placeData };
   
       newPlaceData[field] = value;
   
-      console.log(newPlaceData);
+    //   console.log(newPlaceData);
       setPlaceData(newPlaceData);
 
       

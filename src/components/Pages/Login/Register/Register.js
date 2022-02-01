@@ -19,8 +19,8 @@ const Register = () => {
         registerData.password,
         registerData.UserName
       );
-      console.log("data send");
-      console.log(registerData);
+      // console.log("data send");
+      // console.log(registerData);
     }
     e.preventDefault();
   };

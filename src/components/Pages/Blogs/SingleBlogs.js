@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const SingleBlogs = () => {
     const {id} =useParams();
-    console.log(id);
+    // console.log(id);
 
     const [singleData,setSingleData]=useState({});
 
@@ -14,7 +14,7 @@ const SingleBlogs = () => {
         .then(data=>setSingleData(data))
     },[]);
 
-    console.log(singleData);
+    // console.log(singleData);
 
     return (
 

@@ -11,7 +11,7 @@ const Blogs = () => {
 
   // let size = 10;
   useEffect(() => {
-    fetch(`http://localhost:5000?page=${selectedPage}&&size=${itemSize}`)
+    fetch(`https://calm-anchorage-75702.herokuapp.com/?page=${selectedPage}&&size=${itemSize}`)
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.blogs);
