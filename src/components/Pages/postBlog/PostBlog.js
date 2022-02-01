@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './PostBlog.css';
 
 const PostBlog = () => {
-  
+
   
     const [placeData,setPlaceData]=useState('');
     // const history = useHistory();
@@ -11,6 +11,34 @@ const PostBlog = () => {
       
     //   e.preventDefault();
     // };
+
+    useEffect(()=>{
+        document.title="Post Blog"
+    },[])
+
+
+    const handleOnsubmit=(e)=>{
+        e.preventDefault();
+        fetch('https://calm-anchorage-75702.herokuapp.com/postBlog',{
+            
+            method:"POST",
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(placeData)
+                
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    console.log("succefully inserted");
+                    // console.log(data);
+    
+                }
+            })
+        
+    }
+
   
     const handleOnChange = (e) => {
       const field = e.target.name;
@@ -24,17 +52,26 @@ const PostBlog = () => {
   
       console.log(newPlaceData);
       setPlaceData(newPlaceData);
+
+      
     }
 
     return (
         <>
-         <div className="blog-page">
+         <div className="blog-page mt-5 pt-5">
             <div className="container">
-                <form className="w-50 mx-auto mt-5">
+                <form onSubmit={handleOnsubmit} className="w-50 mx-auto mt-5">
                    
                     <div className="mb-3">
                 
                         
+                        <div>
+                            <label htmlFor="exampleInputName" className="form-label">Image Link</label>
+                            <input
+                            name='picture'
+                            onBlur={handleOnChange}
+                             type="text" className="form-control" id="exampleInputName" />
+                        </div>
                         <div>
                             <label htmlFor="exampleInputName" className="form-label">Location</label>
                             <input

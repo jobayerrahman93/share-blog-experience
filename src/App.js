@@ -13,33 +13,33 @@ function App() {
   return (
     <div className="">
       <AuthProvider>
-      <BrowserRouter>
-        <SharedNavigation></SharedNavigation>
-        <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
+        <BrowserRouter>
+          <SharedNavigation></SharedNavigation>
+          <Routes>
+            <Route path="/" element={<Home></Home>}></Route>
 
-          <Route
-            path="bookingDetails/:id"
-            element={
-              <PrivateRoute>
-                <SingleBlogs />
-              </PrivateRoute>
-            }
-          ></Route>
+            <Route
+              path="bookingDetails/:id"
+              element={
+                <PrivateRoute>
+                  <SingleBlogs />
+                </PrivateRoute>
+              }
+            ></Route>
 
-          <Route path="login" element={<Login></Login>}></Route>
-          <Route path="register" element={<Register></Register>}></Route>
-          <Route
-            path="blog"
-            element={
-              <PrivateRoute>
-                <PostBlog />
-              </PrivateRoute>
-            }
-          ></Route>
-        </Routes>
-        <Footer></Footer>
-      </BrowserRouter>
+            <Route path="login" element={<Login></Login>}></Route>
+            <Route path="register" element={<Register></Register>}></Route>
+            <Route
+              path="postBlog"
+              element={
+                <PrivateRoute>
+                  <PostBlog />
+                </PrivateRoute>
+              }
+            ></Route>
+          </Routes>
+          <Footer></Footer>
+        </BrowserRouter>
       </AuthProvider>
     </div>
   );

@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useFirebase from "../../Firebase/useFirebase/useFirebase";
+import "./SharedNavigation.css";
 const SharedNavigation = () => {
-  
-
-  const {user,logOut}=useFirebase();
+  const { user, logOut } = useFirebase();
   const navStyle = {
     textDecoration: "none",
   };
@@ -18,8 +17,6 @@ const SharedNavigation = () => {
             Travel
           </Link>
 
-          
-
           <button
             className="navbar-toggler"
             type="button"
@@ -32,42 +29,66 @@ const SharedNavigation = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarText">
-           
-
             <ul className="navbar-nav ms-auto  mb-2 ms-2 mb-lg-0 fs-5">
-              
-                <li className="nav-item">
-                  <Link style={navStyle} to="/" className="nav-link active me-3" aria-current="page">
-                    Home
-                  </Link>
-                </li>
-            
-             
-                <li className="nav-item">
-                  <Link style={navStyle} to="/blog" className="nav-link me-3">
-                    Post Blog
-                  </Link>
-                </li>
-              
+              <li className="nav-item">
+                <NavLink
+                    style={({ isActive }) => {
+                      return {
+                        backgroundColor: isActive ? "#00cf5d" : "",
+                        border: isActive ? "none" : "block",
+                      };
+                    }}
+                  to="/"
+                  className="nav-link navlist me-3"
+                  aria-current="page"
+                >
+                  Home
+                </NavLink>
+              </li>
 
-             
-               
-                {!user?.email ? (
-               
-               <li className="nav-item">
-                 <Link style={navStyle} to="/login" className="nav-link" href="#">
-                   Log In
-                 </Link>
-               </li>
+              <li className="nav-item">
+                <NavLink
+                  style={({ isActive }) => {
+                    return {
+                      backgroundColor: isActive ? "#00cf5d" : "",
+                      border: isActive ? "none" : "block",
+                    };
+                  }}
+                  to="/postBlog"
+                  className="nav-link navlist me-3"
+                >
+                  Post Blog
+                </NavLink>
+              </li>
+
+              {!user?.email ? (
+                <li className="nav-item">
+                  <NavLink
+                    style={({ isActive }) => {
+                      return {
+                        backgroundColor: isActive ? "#00cf5d" : "",
+                        border: isActive ? "none" : "block",
+                      };
+                    }}
+                    to="/login"
+                    className="nav-link"
+                    href="#"
+                  >
+                    Log In
+                  </NavLink>
+                </li>
+              ) : (
+                <NavLink
             
-           ) : (
-             <li className="nav-item">
-               {/* <span>{user.displayName}</span> */}
-               <a onClick={logOut} className="nav-link" href="#">
-                 Log Out
-               </a>
-             </li>
-           )}
+                  className="nav-link"
+                  onClick={logOut}
+                  style={{marginTop:"10px"}}
+                  to=""
+                >
+                  {/* <span>{user.displayName}</span> */}
+                  Log Out
+                </NavLink>
+              )}
             </ul>
 
             <div className="ms-5">
@@ -79,11 +100,10 @@ const SharedNavigation = () => {
                   src={user.photoURL}
                   height={50}
                   width={50}
+                  alt="user"
                 />
               )}
             </div>
-
-         
           </div>
         </div>
       </nav>

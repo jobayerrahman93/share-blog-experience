@@ -1,5 +1,5 @@
-import React,{useEffect,useState} from 'react';
-import {useParams} from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 
 const SingleBlogs = () => {
     const {id} =useParams();
@@ -9,7 +9,7 @@ const SingleBlogs = () => {
 
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/bookingDetails/${id}`)
+        fetch(`https://calm-anchorage-75702.herokuapp.com/bookingDetails/${id}`)
         .then(res=>res.json())
         .then(data=>setSingleData(data))
     },[]);

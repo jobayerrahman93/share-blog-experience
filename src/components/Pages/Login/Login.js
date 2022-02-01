@@ -1,29 +1,47 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useFirebase from '../../Firebase/useFirebase/useFirebase';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
 import loginImage from '../Login/images/login.png';
 
 
 const Login = () => {
 
     const [loginData, setLoginData] = useState('');
-    const {loginUser,googleSignIn}=useFirebase();
+    const {loginUser,googleSignIn,setUser}=useAuth();
+    const location=useLocation();
+    // console.log(location);
+
+    const redirect_uri= location.state?.from ||'/';
+
+    useEffect(()=>{
+        document.title="Login"
+    },[])
+
 
   
    
     // const location = useLocation();
     // // console.log('login',location);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const handleOnsubmit = (e) => {
 
-        loginUser(loginData.email,loginData.password);
-
-        // if (location.state?.from) {
-        //   navigate(location.state.from);
-        // }
-
+        loginUser(loginData.email,loginData.password,location)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            setUser(user);
+    
+            console.log(location, "from loginuser");
+            
+            navigate(redirect_uri);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+        
     
         e.preventDefault();
     }
@@ -39,6 +57,28 @@ const Login = () => {
 
         setLoginData(newLoginData);
 
+
+    }
+
+
+    const signIngoogle=()=>{
+
+        googleSignIn()
+        .then((result) => {
+            const user = result.user;
+            console.log("usergoogle", user);
+    
+            setUser(user);
+            console.log(location, "google");
+
+
+            navigate(redirect_uri);
+    
+        
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+          });
 
     }
 
@@ -73,7 +113,7 @@ const Login = () => {
                             </div>
 
                             <button type="submit" className="btn btn-primary">Login</button>
-                            <button onClick={()=>googleSignIn()}  type="submit" className="btn btn-warning ms-3">Sign in with google</button>
+                            <button onClick={()=>signIngoogle()}  type="submit" className="btn btn-warning ms-3">Sign in with google</button>
 
                             <Link to="/register">
                                 <p  className="my-3">New user ? Please register</p>
